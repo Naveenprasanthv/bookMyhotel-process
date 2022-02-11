@@ -65,15 +65,50 @@ payload.ns0#Envelope.ns0#Body.result.*Bookings map {
 		</ee:transform>
 	</flow>
 	<flow name="PostHotel" doc:id="a8d08c05-1eab-453f-a371-690377752a83" >
-		<ee:transform doc:name="Transform Message" doc:id="48edde3e-baa4-40c0-b0be-3dd96b689708" >
+		<ee:transform doc:name="Transform Message" doc:id="23a694e6-4272-455b-b737-1d719bf430a3" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
 output application/xml
+ns ns0 http://schemas.xmlsoap.org/soap/envelope/
 ---
 {
+	ns0#Envelope: {
+		ns0#Body: {
+			result: {
+				Hotels: {
+					amenities: payload.amenities,
+					rooms: payload.rooms as String,
+					address: payload.address,
+					rating: payload.rating,
+					paymentTypes: payload.paymentTypes,
+					hotelId: payload.hotelId,
+					hotelName: payload.hotelName,
+					food: payload.food
+				}
+			}
+		}
+	}
 }]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<http:request method="POST" doc:name="Request" doc:id="78570366-a7f5-446d-9251-a790b277cf75" config-ref="HTTP_Request_configuration" path="/Hotel/HotelSOAP"/>
+		<http:request method="POST" doc:name="Request" doc:id="78570366-a7f5-446d-9251-a790b277cf75" config-ref="HTTP_Request_configuration" path="/Hotel/HotelSOAP">
+			<http:body ><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:hot="http://www.bookmyhotel.com/Hotel/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <hot:PostHotel>
+         <Hotel>
+            <HotelId></HotelId>
+            <HotelName>#[payload.HotelName]</HotelName>
+            <rating>#[payload.rating]</rating>
+            <address>#[payload.address]</address>
+            <rooms>#[payload.rooms]</rooms>
+            <paymentType>#[payload.paymentType]</paymentType>
+            <amenities>#[payload.amenities]</amenities>
+            <food>#[payload.food]</food>
+         </Hotel>
+      </hot:PostHotel>
+   </soapenv:Body>
+</soapenv:Envelope>]]></http:body>
+		</http:request>
 	</flow>
 </mule>

@@ -328,17 +328,6 @@ output application/json
         </ee:transform>
     </flow>
     <flow name="post:\hotels:application\json:bookmyhotelapi-config">
-        <ee:transform>
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  code: 404,
-  reasonPhrase: "Not Found",
-  details: "The requested resource is not found"
-}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
+        <flow-ref doc:name="Flow Reference" doc:id="f4656c45-d199-4192-8fd0-16da8e433e3a" name="PostHotel"/>
     </flow>
 </mule>

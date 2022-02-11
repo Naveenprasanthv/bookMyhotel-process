@@ -1,0 +1,5 @@
+http:
+  port: "8081"
+  host: "localhost"
+  chost: "bookmihotel1.us-e2.cloudhub.io"
+

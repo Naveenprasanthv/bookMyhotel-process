@@ -1,0 +1,66 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Body>
+        <result>
+            <Hotels>
+                <amenities>roomservice</amenities>
+                <rooms>300</rooms>
+                <address>Chennai</address>
+                <rating>5 Star</rating>
+                <paymentTypes>CASH/CARD</paymentTypes>
+                <hotelId>1</hotelId>
+                <hotelName>Taj-Group</hotelName>
+                <food>veg/non-veg</food>
+            </Hotels>
+            <Hotels>
+                <amenities>wifi/roomservice</amenities>
+                <rooms>200</rooms>
+                <address>Salem</address>
+                <rating>5</rating>
+                <paymentTypes>CASH/CARD</paymentTypes>
+                <hotelId>2</hotelId>
+                <hotelName>GRT</hotelName>
+                <food>veg/non-veg</food>
+            </Hotels>
+            <Hotels>
+                <amenities>Wifi/roomservice</amenities>
+                <rooms/>
+                <address>Salem</address>
+                <rating>2 Star</rating>
+                <paymentTypes>CASH/CARD</paymentTypes>
+                <hotelId>3</hotelId>
+                <hotelName>Taman</hotelName>
+                <food>veg/non-veg</food>
+            </Hotels>
+            <Hotels>
+                <amenities>Wifi/roomservice</amenities>
+                <rooms>50</rooms>
+                <address>Chennai</address>
+                <rating>5 Star</rating>
+                <paymentTypes>CASH/CARD</paymentTypes>
+                <hotelId>5</hotelId>
+                <hotelName>Lemon Tree</hotelName>
+                <food>veg/non-veg</food>
+            </Hotels>
+            <Hotels>
+                <amenities>wifi/roomservice</amenities>
+                <rooms>200</rooms>
+                <address>Salem</address>
+                <rating>5 Star</rating>
+                <paymentTypes>CASH/CARD</paymentTypes>
+                <hotelId>6</hotelId>
+                <hotelName>Taj-Group</hotelName>
+                <food>veg/non-veg</food>
+            </Hotels>
+            <Hotels>
+                <amenities>Wifi/roomservice</amenities>
+                <rooms>50</rooms>
+                <address>Damampatti</address>
+                <rating>5 Star</rating>
+                <paymentTypes>CASH/CARD</paymentTypes>
+                <hotelId>8</hotelId>
+                <hotelName>Kows</hotelName>
+                <food>veg/non-veg</food>
+            </Hotels>
+        </result>
+    </soap:Body>
+</soap:Envelope>

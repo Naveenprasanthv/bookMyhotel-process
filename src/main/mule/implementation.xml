@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="GetHotels" doc:id="a76768e9-e80e-4c21-93c4-f4e741d1d0ab" >
+		<http:request method="POST" doc:name="Request" doc:id="0861f43c-5597-4f45-9894-44c9c81cd06c" config-ref="HTTP_Request_configuration" path="/Hotel/HotelSOAP">
+			<http:body ><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:hot="http://www.bookmyhotel.com/Hotel/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <hot:GetHotels/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></http:body>
+		</http:request>
+		<ee:transform doc:name="Transform Message" doc:id="f18069a0-6295-4021-a121-d6c1ef9a687e" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+ns ns0 http://schemas.xmlsoap.org/soap/envelope/
+---
+
+payload.ns0#Envelope.ns0#Body.result.*Hotels map {
+  'HotelId' : $.hotelId,
+  'Address' : $.address,
+  'Rating' : $.rating,
+  'Food' : $.food,
+  'Amenities' : $.amenities,
+  'Rooms' : $.rooms,
+  'PaymentType' : $.paymentTypes
+}
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+	<flow name="GetBookings" doc:id="c843c230-f0e5-458e-b8e1-8bc9cbdd8352" >
+		<http:request method="POST" doc:name="Request" doc:id="6ca16961-7fe6-4a15-b9ab-332b31a8368d" config-ref="HTTP_Request_configuration" path="/Hotel/HotelSOAP">
+			<http:body ><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:hot="http://www.bookmyhotel.com/Hotel/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <hot:GetBookings/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></http:body>
+		</http:request>
+		<ee:transform doc:name="Transform Message" doc:id="6ef08e2d-81fd-4879-9026-4a09ca28e287" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+ns ns0 http://schemas.xmlsoap.org/soap/envelope/
+---
+
+payload.ns0#Envelope.ns0#Body.result.*Bookings map {
+  'BookingId':$.bookingID,
+  'bookingStartDate': $.bookingStartDate,
+  'bookingEndDate' : $.bookingEndDate,
+  'Food': $.food,
+  'Amenities': $.amenitiesSelected,
+  'Room': $.room,
+  'HotelId' : $.hotelId,
+
+}
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+	<flow name="PostHotel" doc:id="a8d08c05-1eab-453f-a371-690377752a83" >
+		<ee:transform doc:name="Transform Message" doc:id="48edde3e-baa4-40c0-b0be-3dd96b689708" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/xml
+---
+{
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<http:request method="POST" doc:name="Request" doc:id="78570366-a7f5-446d-9251-a790b277cf75" config-ref="HTTP_Request_configuration" path="/Hotel/HotelSOAP"/>
+	</flow>
+</mule>

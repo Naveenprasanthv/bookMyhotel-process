@@ -1,0 +1,10 @@
+{
+    "amenities" : "roomservice",
+    "rooms" : 70,
+    "address" : "Salem",
+    "rating" : "4 Star",
+    "paymentTypes" :  "CASH/CARD",
+    "hotelId" : 3,
+    "hotelName" : "Lemon Tree",
+    "food" : "veg/non-veg"
+}

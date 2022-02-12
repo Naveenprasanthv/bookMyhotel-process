@@ -1,0 +1,24 @@
+%dw 2.0
+
+type auto_64a3d2b8_64e1_4413_b3fd_f38d567102a7_Output_Payload = {
+  amenities: Array<String>, 
+  rooms: Array<{    amount: Number,     roomId: String,     roomType: "double room" | "single deluxe" | "twin room" | "single room" | "double deluxe",     _?: Any  }>, 
+  address: {
+    country: String, 
+    pincode: String, 
+    city: String, 
+    state: String, 
+    addressLine: String, 
+    _?: Any
+  }, 
+  rating: String, 
+  hotelId: String, 
+  paymentTypes: Array<String>, 
+  transport: Array<String>, 
+  languagesSpoken: Array<String>, 
+  hotelName: String, 
+  food: Array<String>, 
+  _?: Any
+} {"description": "Hotel Details",
+"label": "Hotel DataType"}
+
